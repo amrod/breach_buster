@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 import re
+from django.utils.deprecation import MiddlewareMixin
 from gzip import GzipFile
 from random import Random
 from io import BytesIO
@@ -128,7 +129,7 @@ def compress_sequence(sequence):
     zfile.close()
     yield buf.read()
 
-class GZipMiddleware(object):
+class GZipMiddleware(MiddlewareMixin):
     """
     This middleware compresses content if the browser allows gzip compression.
     It sets the Vary header accordingly, so that caches will base their storage
